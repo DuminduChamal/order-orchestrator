@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.orderorchestrator</groupId>
+    <artifactId>order-orchestrator</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Order Orchestrator</name>
+    <description>
+        Event-driven order processing system built to refresh hands-on skills in Java, Spring Boot,
+        Kafka and AWS. Simulates the order lifecycle for an e-commerce platform using a SAGA-style
+        orchestration pattern across independently deployable Spring Boot services.
+    </description>
+
+    <!--
+        This is a reactor aggregator only (packaging=pom). Each module below owns its own
+        spring-boot-starter-parent inheritance, exactly like a project generated from
+        start.spring.io - that keeps every service independently buildable and deployable,
+        which matters once these are running as separate containers/services later on.
+    -->
+    <modules>
+        <module>order-service</module>
+        <!-- Coming next: inventory-service, payment-service, orchestrator-service, notification-service -->
+    </modules>
+
+</project>
