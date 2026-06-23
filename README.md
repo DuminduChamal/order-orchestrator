@@ -36,3 +36,13 @@ across independently deployable Spring Boot services.
 We're deliberately building **one working slice at a time** instead of scaffolding
 every service up front - each phase should run, and be worth understanding, before the
 next one lands on top of it.
+
+## Tech stack (and why these versions)
+
+- **Java 25 (LTS)** - current recommended LTS as of 2026; Spring Boot 4 supports it fully.
+- **Spring Boot 4.0 / Spring Framework 7** - GA'd November 2025. Worth knowing deliberately:
+  it moved the baseline to Jakarta EE 11, adopted JSpecify null-safety annotations and
+  Jackson 3, and fully modularized the Boot codebase.
+- **Kafka 4.x in KRaft mode** - no ZooKeeper. ZooKeeper mode was removed entirely in Kafka
+  4.0, so KRaft single-node is the realistic way to run Kafka locally now.
+- **PostgreSQL 17**, **Flyway** for schema migrations (never `ddl-auto: update`).
