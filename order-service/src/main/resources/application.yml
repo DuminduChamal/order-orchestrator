@@ -29,6 +29,12 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      properties:
+        enable.idempotence: true
+        # Don't leak the producing service's Java class names onto the wire - consumers
+        # should deserialize based on the topic/event contract, not a __TypeId__ header.
+        spring.json.add.type.headers: false
 
 order-events:
   topic: order-events
