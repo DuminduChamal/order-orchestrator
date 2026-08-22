@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @Service
@@ -47,6 +48,17 @@ public class OrderService {
         eventPublisher.publishOrderCreated(toEvent(saved));
 
         return saved;
+    }
+
+    @Transactional(readOnly = true)
+    public Order getOrder(UUID orderId) {
+        return orderRepository.findById(orderId)
+                .orElseThrow(() -> new NoSuchElementException("Order not found: " + orderId));
+    }
+
+    @Transactional(readOnly = true)
+    public List<Order> listOrders() {
+        return orderRepository.findAll();
     }
 
     private OrderItem toOrderItem(CreateOrderItemRequest item) {
